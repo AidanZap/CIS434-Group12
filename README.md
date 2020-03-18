@@ -1,6 +1,6 @@
 # CIS434-Group12
-Making a tic-tac-toe game
+Recreating Snake Game in Python; PyhonPythonGame
 
-Aidan Z
-Toral Z
-Derek W
+####Aidan Z
+####Toral Z
+####Derek W
