@@ -6,7 +6,7 @@ Recreating Snake Game in Python; PyhonPythonGame
 ####Derek W
 
 
-V1.0 Base game is working
+V1.0.0 Base game is working
   features to work on next:
     -main menu
     -difficulties

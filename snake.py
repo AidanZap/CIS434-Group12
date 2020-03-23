@@ -5,7 +5,7 @@ import math
 import random
 import pygame
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox #fixx
 
 
 
@@ -57,22 +57,22 @@ class snake(object):
             keys = pygame.key.get_pressed()
 
             for key in keys:
-                if keys[pygame.K_LEFT]:
+                if keys[pygame.K_LEFT] and self.dirnx != 1:
                     self.dirnx = -1
                     self.dirny = 0
                     self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
 
-                elif keys[pygame.K_RIGHT]:
+                elif keys[pygame.K_RIGHT] and self.dirnx != -1:
                     self.dirnx = 1
                     self.dirny = 0
                     self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
 
-                elif keys[pygame.K_UP]:
+                elif keys[pygame.K_UP] and self.dirny != 1:
                     self.dirny = -1
                     self.dirnx = 0
                     self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
 
-                elif keys[pygame.K_DOWN]:
+                elif keys[pygame.K_DOWN] and self.dirny != -1:
                     self.dirny = 1
                     self.dirnx = 0
                     self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
