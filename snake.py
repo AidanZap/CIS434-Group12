@@ -184,19 +184,23 @@ def main():
     clock = pygame.time.Clock()
 
     while flag:
-        pygame.time.delay(50)
-        clock.tick(10)
-        s.move()
-        if s.body[0].pos == snack.pos:
-            s.addCube()
-            snack = cube(randomSnack(rows, s), color=(0,255,0))
+        if gamestate is menu        #code no longer works
+            menu()
+            
+        elif gamestate is playing
+            pygame.time.delay(50)
+            clock.tick(10)
+            s.move()
+            if s.body[0].pos == snack.pos:
+                s.addCube()
+                snack = cube(randomSnack(rows, s), color=(0,255,0))
 
-        for x in range(len(s.body)):
-            if s.body[x].pos in list(map(lambda z:z.pos,s.body[x+1:])):
-                print('Score: ', len(s.body))
-                message_box('You Lost!','Play Again..')
-                s.reset((10,10))
-                break
+            for x in range(len(s.body)):
+                if s.body[x].pos in list(map(lambda z:z.pos,s.body[x+1:])):
+                    print('Score: ', len(s.body))
+                    message_box('You Lost!','Play Again..')
+                    s.reset((10,10))
+                    break
 
 
 

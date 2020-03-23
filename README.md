@@ -13,3 +13,7 @@ V1.0.0 Base game is working
     -live score
     -customization menu in main menu to change colors of things
     
+V1.0.1 Added functionality, snale can not turn 180 degrees
+  todo:
+    -add menu() (Aidan, Derek)
+    -Score (toral)
