@@ -8,8 +8,6 @@ import tkinter as tk
 from tkinter import messagebox #fixx
 
 
-
-
 class cube(object):
     rows = 20
     w = 500
@@ -39,9 +37,11 @@ class cube(object):
             pygame.draw.circle(surface, (0,0,0), circleMiddle, radius)
             pygame.draw.circle(surface, (0,0,0), circleMiddle2, radius)
 
+
 class snake(object):
     body = []
     turns = {}
+
     def __init__(self, color, pos):
         self.color = color
         self.head = cube(pos)
@@ -92,7 +92,6 @@ class snake(object):
                 elif c.dirny == -1 and c.pos[1] <=0: c.pos = (c.pos[0], c.rows -1)
                 else: c.move(c.dirnx, c.dirny)
 
-    
     def reset(self, pos):
         self.head = cube(pos)
         self.body = []
@@ -117,13 +116,13 @@ class snake(object):
         self.body[-1].dirnx = dx
         self.body[-1].dirny = dy
 
-
     def draw(self, surface):
         for i, c in enumerate(self.body):
             if i == 0:
                 c.draw(surface, True)
             else:
                 c.draw(surface)
+
 
 def drawGrid(w, rows, surface):
     rowWidth = width // rows
@@ -136,16 +135,17 @@ def drawGrid(w, rows, surface):
         pygame.draw.line(surface, (150,150,150), (x,0), (x,w))
         pygame.draw.line(surface, (150,150,150), (0,y), (w,y))
 
+
 def redrawWindow(surface):
-    global rows, width, s, snack
-    surface.fill((0,0,0))
+    global width, rows
+    surface.fill((0, 0, 0))
     s.draw(surface)
     snack.draw(surface)
     drawGrid(width, rows, surface)
     pygame.display.update()
 
-def randomSnack(rows, item):
 
+def randomSnack(rows, item):
     positions = item.body
 
     while True:
@@ -170,38 +170,54 @@ def message_box(subject,content):
         pass
 
 
+def menu():
+    global win, clock
+    on_menu = True
+
+    while on_menu:
+        for event in pygame.event.get():
+            if event.type == pygame.quit():
+                pygame.quit()
+
+        redrawWindow(win)
+        font = pygame.font.SysFont(None, 135)
+        text_obj = font.render("PythonPythonGame", 1, (0, 255, 0))
+        text_rect = text_obj.get_rect()
+        text_rect.topleft = {200, 200}
+        win.blit(text_obj, text_rect)
+
+        pygame.display.update()
+        clock.tick(60)
+
 
 def main():
-
-    global width, rows, s, snack
+    global width, rows, win, clock, s, snack
+    pygame.init()
     width = 500
     rows = 20
     win = pygame.display.set_mode((width, width))
-    s = snake((255,0,0), (10,10))
-    snack = cube(randomSnack(rows, s), color=(0,255,0))
+    clock = pygame.time.Clock()
+    s = snake((255, 0, 0), (10, 10))
+    snack = cube(randomSnack(rows, s), color=(0, 255, 0))
+
+    menu()
+
     flag = True
 
-    clock = pygame.time.Clock()
-
     while flag:
-        if gamestate is menu        #code no longer works
-            menu()
-            
-        elif gamestate is playing
-            pygame.time.delay(50)
-            clock.tick(10)
-            s.move()
-            if s.body[0].pos == snack.pos:
-                s.addCube()
-                snack = cube(randomSnack(rows, s), color=(0,255,0))
+        pygame.time.delay(50)
+        clock.tick(10)
+        s.move()
+        if s.body[0].pos == snack.pos:
+            s.addCube()
+            snack = cube(randomSnack(rows, s), color=(0,255,0))
 
-            for x in range(len(s.body)):
-                if s.body[x].pos in list(map(lambda z:z.pos,s.body[x+1:])):
-                    print('Score: ', len(s.body))
-                    message_box('You Lost!','Play Again..')
-                    s.reset((10,10))
-                    break
-
+        for x in range(len(s.body)):
+            if s.body[x].pos in list(map(lambda z:z.pos,s.body[x+1:])):
+                print('Score: ', len(s.body))
+                message_box('You Lost!', 'Play Again..')
+                s.reset((10, 10))
+                break
 
 
         redrawWindow(win)
