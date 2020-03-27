@@ -1,12 +1,5 @@
-# Playlist I was looking at : https://www.youtube.com/watch?v=i6xMBig-pP4
-
-
-import math
-import random
 import pygame
 import cube
-
-
 
 
 class snake(object):
@@ -47,7 +40,6 @@ class snake(object):
                     self.dirny = 1
                     self.dirnx = 0
                     self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
-
 
         for i, c in enumerate(self.body):
             p = c.pos[:]
@@ -93,4 +85,3 @@ class snake(object):
                 c.draw(surface, True)
             else:
                 c.draw(surface)
-

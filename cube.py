@@ -1,12 +1,10 @@
-
-
-import math
-import random
 import pygame
+
 
 class cube(object):
     rows = 20
     w = 500
+
     def __init__(self, start, dirnx = 1, dirny = 0, color = (255,0,0)):
         self.pos = start
         self.dirnx = 1
