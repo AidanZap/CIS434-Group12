@@ -4,7 +4,7 @@ import pygame
 from pygame.locals import *
 import cube
 import snake
-
+import score
 
 def draw_grid(width, rows, surface):
     row_width = width // rows
@@ -18,10 +18,11 @@ def draw_grid(width, rows, surface):
         pygame.draw.line(surface, (150, 150, 150), (0, y), (width, y))
 
 
-def redraw_window(surface, s, snack, width, rows):
+def redraw_window(surface, s, snack, scr, width, rows):
     surface.fill((0, 0, 0))
     s.draw(surface)
     snack.draw(surface)
+    scr.draw(surface)
     draw_grid(width, rows, surface)
     pygame.display.update()
 
@@ -47,7 +48,6 @@ def draw_text(text, font, text_color, surface, x, y):
     text_rect.topleft = (x, y)
     surface.blit(text_obj, text_rect)
 
-
 def main():
     pygame.init()
     width = 500
@@ -60,6 +60,7 @@ def main():
     # ***** Game Objects ***** #
     s = snake.snake((255, 0, 0), (10, 10))
     snack = cube.cube(random_snack(rows, s), color=(0, 255, 0))
+    scr = score.score(0) 
 
     # ***** Main Loop ***** #
     on_menu = True
@@ -114,12 +115,13 @@ def main():
             pygame.display.update()
             clock.tick(60)
 
-        while playing:
+        while playing: 
             pygame.time.delay(50)
             clock.tick(10)
             s.move()
             if s.body[0].pos == snack.pos:
                 s.addCube()
+                scr.update()
                 snack = cube.cube(random_snack(rows, s), color=(0, 255, 0))
 
             for x in range(len(s.body)):
@@ -129,7 +131,7 @@ def main():
                     on_menu = True
                     break
 
-            redraw_window(surface, s, snack, width, rows)
+            redraw_window(surface, s, snack, scr, width, rows)
 
     pygame.quit()
     quit()
