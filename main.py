@@ -18,9 +18,11 @@ surface = pygame.display.set_mode((width, width))
 font = pygame.font.SysFont("Arial", 32)
 white = (255,255,255)
 black = (0, 0, 0)
+green = (0,200,30)
 aqua= (0, 200, 170)
 blue = (0, 0, 255)
 red = (255, 0, 0)
+grey = (150,150,150)
 
 buttons = []
 start_button = button.button("Play!",160,210,180,60,aqua,white)
@@ -42,12 +44,12 @@ def draw_grid(width, rows, surface):
     for i in range(rows):
         x += row_width
         y += row_width
-        pygame.draw.line(surface, (150, 150, 150), (x, 0), (x, width))
-        pygame.draw.line(surface, (150, 150, 150), (0, y), (width, y))
+        pygame.draw.line(surface, grey, (x, 0), (x, width))
+        pygame.draw.line(surface, grey, (0, y), (width, y))
 
 
 def redraw_window(surface, s, snack, scr, width, rows):
-    surface.fill((0, 0, 0))
+    surface.fill(black)
     s.draw(surface)
     snack.draw(surface)
     scr.draw(surface)
@@ -78,7 +80,7 @@ def draw_text(text, font, text_color, surface, x, y):
 
 def menu(font,clock):
     global on_menu, playing, surface
-    surface.fill((0, 0, 0))
+    surface.fill(black)
 
     for event in pygame.event.get():
         print(event)
@@ -131,7 +133,7 @@ def main():
 
     # ***** Game Objects ***** #
     s = snake.snake(blue, (10, 5))
-    snack = cube.cube(random_snack(rows, s), color=(0, 255, 0))
+    snack = cube.cube(random_snack(rows, s), color=green)
     scr = score.score(0)
     if two_player:
         s2 = snake.snake(red, (10,15))
@@ -153,7 +155,7 @@ def main():
             if s.body[0].pos == snack.pos:
                 s.addCube()
                 scr.update()
-                snack = cube.cube(random_snack(rows, s), color=(0, 255, 0))
+                snack = cube.cube(random_snack(rows, s), color=green)
 
             for x in range(len(s.body)):
                 if s.body[x].pos in list(map(lambda z: z.pos, s.body[x+1:])):
