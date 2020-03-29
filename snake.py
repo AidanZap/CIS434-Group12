@@ -26,21 +26,26 @@ class snake(object):
                     self.dirnx = -1
                     self.dirny = 0
                     self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+                    break
 
                 elif keys[pygame.K_RIGHT] and self.dirnx != -1:
                     self.dirnx = 1
                     self.dirny = 0
                     self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+                    break
 
                 elif keys[pygame.K_UP] and self.dirny != 1:
                     self.dirny = -1
                     self.dirnx = 0
                     self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+                    break
 
                 elif keys[pygame.K_DOWN] and self.dirny != -1:
                     self.dirny = 1
                     self.dirnx = 0
                     self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+                    break
+            break
 
         for i, c in enumerate(self.body):
             p = c.pos[:]

@@ -161,6 +161,7 @@ def main():
                 if s.body[x].pos in list(map(lambda z: z.pos, s.body[x+1:])):
                     print('Score: ', len(s.body))
                     s.reset((10, 10))
+                    scr.score_count = 0
                     playing = False
                     on_menu = True
                     break
