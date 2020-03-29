@@ -46,7 +46,7 @@ def draw_grid(width, rows, surface):
         pygame.draw.line(surface, (150, 150, 150), (0, y), (width, y))
 
 
-def redraw_window(surface, s, snack, scr,width, rows):
+def redraw_window(surface, s, snack, scr, width, rows):
     surface.fill((0, 0, 0))
     s.draw(surface)
     snack.draw(surface)
@@ -146,7 +146,7 @@ def main():
             print(on_menu)
             
 
-        while playing:
+        while playing: 
             pygame.time.delay(50)
             clock.tick(10)
             s.move()

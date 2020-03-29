@@ -1,4 +1,3 @@
-
 import pygame
 
 class score(object):
@@ -14,3 +13,6 @@ class score(object):
         font = pygame.font.SysFont("Arial", 32)
         text = font.render("Score: "+ str(self.score_count), 1, (255, 255, 255))
         surface.blit(text, [0,0])
+                
+
+    
