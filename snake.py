@@ -17,6 +17,7 @@ class snake(object):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
+                break
 
             keys = pygame.key.get_pressed()
 

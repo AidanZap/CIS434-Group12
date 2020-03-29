@@ -4,6 +4,34 @@ import pygame
 from pygame.locals import *
 import cube
 import snake
+import button
+import score
+
+
+pygame.init()
+width = 500
+rows = 20
+on_menu = True
+playing = False
+two_player = False
+surface = pygame.display.set_mode((width, width))
+font = pygame.font.SysFont("Arial", 32)
+white = (255,255,255)
+black = (0, 0, 0)
+aqua= (0, 200, 170)
+blue = (0, 0, 255)
+red = (255, 0, 0)
+
+buttons = []
+start_button = button.button("Play!",160,210,180,60,aqua,white)
+two_player_button = button.button("2-Player Game",140, 280, 230, 60,aqua,white)
+settings_button = button.button("Game Settings",140, 350, 230, 60,aqua,white)
+quit_button = button.button("Quit", 212, 420, 80, 60, aqua, white)
+
+buttons.append(start_button)
+buttons.append(two_player_button)
+buttons.append(settings_button)
+buttons.append(quit_button)
 
 
 def draw_grid(width, rows, surface):
@@ -18,10 +46,11 @@ def draw_grid(width, rows, surface):
         pygame.draw.line(surface, (150, 150, 150), (0, y), (width, y))
 
 
-def redraw_window(surface, s, snack, width, rows):
+def redraw_window(surface, s, snack, scr,width, rows):
     surface.fill((0, 0, 0))
     s.draw(surface)
     snack.draw(surface)
+    scr.draw(surface)
     draw_grid(width, rows, surface)
     pygame.display.update()
 
@@ -44,75 +73,78 @@ def random_snack(rows, item):
 def draw_text(text, font, text_color, surface, x, y):
     text_obj = font.render(text, 1, text_color)
     text_rect = text_obj.get_rect()
-    text_rect.topleft = (x, y)
+    text_rect.center = (x, y)
     surface.blit(text_obj, text_rect)
+
+def menu(font,clock):
+    global on_menu, playing, surface
+    surface.fill((0, 0, 0))
+
+    for event in pygame.event.get():
+        print(event)
+        if event.type == QUIT:
+            pygame.quit()
+            quit()
+        click = (event.type == pygame.MOUSEBUTTONDOWN)                  
+        mx, my = pygame.mouse.get_pos()
+
+        if start_button.rect.collidepoint(mx, my):
+            start_button.hover = True
+            print("start")
+            if click:
+                print("start")
+                on_menu = False
+                playing = True
+        else:
+            start_button.hover = False
+        if two_player_button.rect.collidepoint((mx, my)):
+            two_player_button.hover = True
+            if click:
+                two_player = True
+        else:
+            two_player_button.hover = False
+    
+        if settings_button.rect.collidepoint(mx, my):
+            settings_button.hover = True
+        else:
+            settings_button.hover = False
+            
+        if quit_button.rect.collidepoint(mx, my):
+            quit_button.hover = True
+            if click:
+                pygame.quit()
+        else:
+            quit_button.hover = False
+    for b in buttons:
+        b.draw(surface,font)
+    pygame.display.update()
+    clock.tick(60)
 
 
 def main():
-    pygame.init()
-    width = 500
-    rows = 20
-    surface = pygame.display.set_mode((width, width))
+    global on_menu, playing
+    
+    #surface = pygame.display.set_mode((width, width))
     pygame.display.set_caption("PythonPythonGame")
     clock = pygame.time.Clock()
-    font = pygame.font.SysFont("Arial", 32)
+
 
     # ***** Game Objects ***** #
-    s = snake.snake((255, 0, 0), (10, 10))
+    s = snake.snake(blue, (10, 5))
     snack = cube.cube(random_snack(rows, s), color=(0, 255, 0))
+    scr = score.score(0)
+    if two_player:
+        s2 = snake.snake(red, (10,15))
 
     # ***** Main Loop ***** #
-    on_menu = True
-    playing = False
     main_loop = True
 
     while main_loop:
 
         while on_menu:
-            surface.fill((0, 0, 0))
-
-            start_button = pygame.Rect(160, 210, 180, 60)
-            pygame.draw.rect(surface, (0, 128, 0), start_button)
-            draw_text("Start Game", font, (255, 255, 255), surface, 170, 220)
-
-            two_player_button = pygame.Rect(140, 280, 230, 60)
-            pygame.draw.rect(surface, (0, 128, 0), two_player_button)
-            draw_text("2-Player Game", font, (255, 255, 255), surface, 150, 290)
-
-            settings_button = pygame.Rect(140, 350, 230, 60)
-            pygame.draw.rect(surface, (0, 128, 0), settings_button)
-            draw_text("Game Settings", font, (255, 255, 255), surface, 150, 360)
-
-            quit_button = pygame.Rect(212, 420, 80, 60)
-            pygame.draw.rect(surface, (0, 128, 0), quit_button)
-            draw_text("Quit", font, (255, 255, 255), surface, 220, 430)
-
-            mx, my = pygame.mouse.get_pos()
-            if start_button.collidepoint(mx, my):
-                if click:
-                    on_menu = False
-                    playing = True
-            if two_player_button.collidepoint((mx, my)):
-                if click:
-                    pass
-            if settings_button.collidepoint(mx, my):
-                if click:
-                    pass
-            if quit_button.collidepoint(mx, my):
-                if click:
-                    on_menu = False
-                    main_loop = False
-
-            click = False
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    pygame.quit()
-                    quit()
-                if event.type == MOUSEBUTTONDOWN:
-                    click = True
-
-            pygame.display.update()
-            clock.tick(60)
+            menu(font,clock)
+            print(on_menu)
+            
 
         while playing:
             pygame.time.delay(50)
@@ -120,16 +152,18 @@ def main():
             s.move()
             if s.body[0].pos == snack.pos:
                 s.addCube()
+                scr.update()
                 snack = cube.cube(random_snack(rows, s), color=(0, 255, 0))
 
             for x in range(len(s.body)):
                 if s.body[x].pos in list(map(lambda z: z.pos, s.body[x+1:])):
                     print('Score: ', len(s.body))
+                    s.reset((10, 10))
                     playing = False
                     on_menu = True
                     break
 
-            redraw_window(surface, s, snack, width, rows)
+            redraw_window(surface, s, snack, scr, width, rows)
 
     pygame.quit()
     quit()
