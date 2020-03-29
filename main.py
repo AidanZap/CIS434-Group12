@@ -16,18 +16,18 @@ playing = False
 two_player = False
 surface = pygame.display.set_mode((width, width))
 font = pygame.font.SysFont("Arial", 32)
-white = (255,255,255)
+white = (255, 255, 255)
 black = (0, 0, 0)
-green = (0,200,30)
+green = (0, 200, 30)
 aqua= (0, 200, 170)
 blue = (0, 0, 255)
 red = (255, 0, 0)
-grey = (150,150,150)
+grey = (150, 150, 150)
 
 buttons = []
-start_button = button.button("Play!",160,210,180,60,aqua,white)
-two_player_button = button.button("2-Player Game",140, 280, 230, 60,aqua,white)
-settings_button = button.button("Game Settings",140, 350, 230, 60,aqua,white)
+start_button = button.button("Play!", 160, 210, 180, 60, aqua, white)
+two_player_button = button.button("2-Player Game", 140, 280, 230, 60, aqua, white)
+settings_button = button.button("Game Settings", 140, 350, 230, 60, aqua, white)
 quit_button = button.button("Quit", 212, 420, 80, 60, aqua, white)
 
 buttons.append(start_button)
@@ -78,12 +78,12 @@ def draw_text(text, font, text_color, surface, x, y):
     text_rect.center = (x, y)
     surface.blit(text_obj, text_rect)
 
-def menu(font,clock):
+
+def menu(font, clock):
     global on_menu, playing, surface
     surface.fill(black)
 
     for event in pygame.event.get():
-        print(event)
         if event.type == QUIT:
             pygame.quit()
             quit()
@@ -92,9 +92,7 @@ def menu(font,clock):
 
         if start_button.rect.collidepoint(mx, my):
             start_button.hover = True
-            print("start")
             if click:
-                print("start")
                 on_menu = False
                 playing = True
         else:
@@ -118,7 +116,7 @@ def menu(font,clock):
         else:
             quit_button.hover = False
     for b in buttons:
-        b.draw(surface,font)
+        b.draw(surface, font)
     pygame.display.update()
     clock.tick(60)
 
@@ -144,9 +142,7 @@ def main():
     while main_loop:
 
         while on_menu:
-            menu(font,clock)
-            print(on_menu)
-            
+            menu(font, clock)
 
         while playing: 
             pygame.time.delay(10)
