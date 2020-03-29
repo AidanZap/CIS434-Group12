@@ -149,7 +149,7 @@ def main():
             
 
         while playing: 
-            pygame.time.delay(50)
+            pygame.time.delay(10)
             clock.tick(10)
             s.move()
             if s.body[0].pos == snack.pos:
