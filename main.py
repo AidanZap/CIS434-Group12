@@ -23,16 +23,17 @@ font = pygame.font.SysFont("Arial", 32)
 white = (255, 255, 255)
 black = (0, 0, 0)
 green = (0, 200, 30)
-aqua= (0, 200, 170)
+aqua= (80, 255, 80)
 blue = (0, 0, 255)
 red = (255, 0, 0)
 grey = (150, 150, 150)
+brown = (139, 69, 19)
 
 buttons = []
-start_button = button.button("Play!", 160, 210, 180, 60, aqua, white)
-two_player_button = button.button("2-Player Game", 140, 280, 230, 60, aqua, white)
-settings_button = button.button("Game Settings", 140, 350, 230, 60, aqua, white)
-quit_button = button.button("Quit", 212, 420, 80, 60, aqua, white)
+start_button = button.button("Play!", 160, 250, 180, 60, brown, white)
+two_player_button = button.button("2-Player Game", 140, 313, 230, 60, brown, white)
+settings_button = button.button("Game Settings", 140, 377, 230, 60, brown, white)
+quit_button = button.button("Quit", 212, 440, 80, 60, brown, white)
 
 buttons.append(start_button)
 buttons.append(two_player_button)
@@ -87,7 +88,8 @@ def menu(font, clock):
     global on_menu, playing, surface
     surface.fill(black)
     h_scr.draw(surface, "High Score: ")
-
+    image = pygame.image.load('Snake-icon.png')
+    surface.blit(image,(125,5))
     for event in pygame.event.get():
         if event.type == QUIT:
             d.close()
@@ -151,7 +153,6 @@ def main():
             menu(font, clock)
 
         while playing: 
-            pygame.time.delay(10)
             clock.tick(10)
             s.move()
             if s.body[0].pos == snack.pos:
