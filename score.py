@@ -1,7 +1,7 @@
 import pygame
 
 class score(object):
-    score_count = 0
+    score_count = 1
     
     def __init__(self, score):
         self.score_count = score
