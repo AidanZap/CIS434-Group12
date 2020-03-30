@@ -25,7 +25,7 @@ V1.0.3 Large Update, Menu was added by Aiden and live score by Toral
       -After that menu was moved into its own function and the button class was created with hover funtionality
       -Toral also created a score class
       -There was some merging errors since Toral and Derek were editing at the same time but they are all resolved
-      -Some refactoring, colors are now at the top, two_player groundwork started, main game objects like font, surface and dimensions          are global. buttons list for quick drawing
+      -Some refactoring, colors are now at the top, two_player groundwork started, main game objects like font, surface and dimensions are global. buttons list for quick drawing
       
 V1.0.4 Persistant data storage setup using python shelve library, used to implement highscore
       - minor modification to score class to be able to use it for multiple purposes
@@ -35,3 +35,9 @@ V1.0.4 Persistant data storage setup using python shelve library, used to implem
       
 Current Bugs:
       -There appears to be a hidden column that the snake can turn into at index x = -1 despite there being 20/20 columns on screen
+
+
+progress report:
+      - add two player race mode and two player melee mode
+      - get started on final report
+      - obstacle fruits
