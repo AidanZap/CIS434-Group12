@@ -1,4 +1,5 @@
-# Playlist I was looking at : https://www.youtube.com/watch?v=i6xMBig-pP4
+#HighScore : 36 DW
+
 import random
 import pygame
 from pygame.locals import *
@@ -6,8 +7,9 @@ import cube
 import snake
 import button
 import score
+import shelve
 
-
+d = shelve.open('score.txt')
 pygame.init()
 width = 500
 rows = 20
@@ -15,6 +17,8 @@ on_menu = True
 playing = False
 two_player = False
 surface = pygame.display.set_mode((width, width))
+scr = score.score(0)
+h_scr = score.score(d['score'])
 font = pygame.font.SysFont("Arial", 32)
 white = (255, 255, 255)
 black = (0, 0, 0)
@@ -52,7 +56,7 @@ def redraw_window(surface, s, snack, scr, width, rows):
     surface.fill(black)
     s.draw(surface)
     snack.draw(surface)
-    scr.draw(surface)
+    scr.draw(surface, "Score: ")
     draw_grid(width, rows, surface)
     pygame.display.update()
 
@@ -82,9 +86,11 @@ def draw_text(text, font, text_color, surface, x, y):
 def menu(font, clock):
     global on_menu, playing, surface
     surface.fill(black)
+    h_scr.draw(surface, "High Score: ")
 
     for event in pygame.event.get():
         if event.type == QUIT:
+            d.close()
             pygame.quit()
             quit()
         click = (event.type == pygame.MOUSEBUTTONDOWN)                  
@@ -132,7 +138,7 @@ def main():
     # ***** Game Objects ***** #
     s = snake.snake(blue, (10, 5))
     snack = cube.cube(random_snack(rows, s), color=green)
-    scr = score.score(0)
+    
     if two_player:
         s2 = snake.snake(red, (10,15))
 
@@ -157,13 +163,16 @@ def main():
                 if s.body[x].pos in list(map(lambda z: z.pos, s.body[x+1:])):
                     print('Score: ', len(s.body))
                     s.reset((10, 10))
+                    if scr.score_count > h_scr.score_count:
+                        d['score'] = scr.score_count
+                        h_scr.score_count = scr.score_count
                     scr.score_count = 0
                     playing = False
                     on_menu = True
                     break
 
             redraw_window(surface, s, snack, scr, width, rows)
-
+    d.close()
     pygame.quit()
     quit()
 
