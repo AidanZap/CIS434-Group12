@@ -23,17 +23,18 @@ font = pygame.font.SysFont("Arial", 32)
 white = (255, 255, 255)
 black = (0, 0, 0)
 green = (0, 200, 30)
-aqua= (80, 255, 80)
+light_green =  (70, 255, 70)
+aqua= (10, 200, 150)
 blue = (0, 0, 255)
 red = (255, 0, 0)
 grey = (150, 150, 150)
 brown = (139, 69, 19)
 
 buttons = []
-start_button = button.button("Play!", 160, 250, 180, 60, brown, white)
-two_player_button = button.button("2-Player Game", 140, 313, 230, 60, brown, white)
-settings_button = button.button("Game Settings", 140, 377, 230, 60, brown, white)
-quit_button = button.button("Quit", 212, 440, 80, 60, brown, white)
+start_button = button.button("Play!", 160, 251, 180, 60, brown, light_green)
+two_player_button = button.button("2-Player Game", 140, 314, 230, 60, brown, light_green)
+settings_button = button.button("Game Settings", 140, 377, 230, 60, brown, light_green)
+quit_button = button.button("Quit", 212, 440, 80, 60, brown, light_green)
 
 buttons.append(start_button)
 buttons.append(two_player_button)
@@ -89,7 +90,7 @@ def menu(font, clock):
     surface.fill(black)
     h_scr.draw(surface, "High Score: ")
     image = pygame.image.load('Snake-icon.png')
-    surface.blit(image,(125,5))
+    surface.blit(image,(125,0))
     for event in pygame.event.get():
         if event.type == QUIT:
             d.close()
