@@ -2,14 +2,14 @@ import pygame
 
 
 class cube(object):
-    rows = 20
-    w = 500
 
-    def __init__(self, start, dirnx = 1, dirny = 0, color = (255,0,0)):
+    def __init__(self, start, dirnx = 1, dirny = 0, color = (255,0,0), rows  = 20, width = 500):
         self.pos = start
         self.dirnx = 1
         self.dirny = 0
         self.color = color
+        self.rows = rows
+        self.w = width
 
     def move(self, dirnx, dirny):
         self.dirnx = dirnx

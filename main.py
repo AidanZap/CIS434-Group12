@@ -9,30 +9,42 @@ import button
 import score
 import shelve
 
+# Shelve anf PyGame startup
 d = shelve.open('score.txt')
 pygame.init()
-width = 500
-rows = 20
+
+#Game Vars
+width = 800
+row_width = 25
+rows = width//row_width
+banner_height = 50
 on_menu = True
 playing = False
 two_player = False
-surface = pygame.display.set_mode((width, width))
-scr = score.score(1)
-h_scr = score.score(d['score'])
+
+# PyGame vars
+surface = pygame.display.set_mode((width, width + banner_height))
 font = pygame.font.SysFont("Arial", 32)
+clock = pygame.time.Clock()
+# Scores
+scr = score.score(1, width)
+h_scr = score.score(d['score'],width)
+# Colors
 white = (255, 255, 255)
 black = (0, 0, 0)
 green = (0, 200, 30)
+dark_grey = (50, 50, 50)
 light_green =  (70, 255, 70)
 aqua= (10, 200, 150)
 blue = (0, 0, 255)
+purple = (125, 0, 125)
 red = (255, 0, 0)
 grey = (150, 150, 150)
 brown = (139, 69, 19)
 
 buttons = []
 start_button = button.button("Play!", 160, 251, 180, 60, brown, light_green)
-two_player_button = button.button("2-Player Game", 140, 314, 230, 60, brown, light_green)
+two_player_button = button.button("Game Mode", 140, 314, 230, 60, brown, light_green)
 settings_button = button.button("Game Settings", 140, 377, 230, 60, brown, light_green)
 quit_button = button.button("Quit", 212, 440, 80, 60, brown, light_green)
 
@@ -50,8 +62,8 @@ def draw_grid(width, rows, surface):
     for i in range(rows):
         x += row_width
         y += row_width
-        pygame.draw.line(surface, grey, (x, 0), (x, width))
-        pygame.draw.line(surface, grey, (0, y), (width, y))
+        pygame.draw.line(surface, dark_grey, (x, 0), (x, width))
+        pygame.draw.line(surface, dark_grey, (0, y), (width, y))
 
 
 def redraw_window(surface, s, snack, scr, width, rows):
@@ -91,6 +103,7 @@ def menu(font, clock):
     h_scr.draw(surface, "High Score: ")
     image = pygame.image.load('Snake-icon.png')
     surface.blit(image,(125,0))
+
     for event in pygame.event.get():
         if event.type == QUIT:
             d.close()
@@ -126,24 +139,26 @@ def menu(font, clock):
             quit_button.hover = False
     for b in buttons:
         b.draw(surface, font)
+
+    x = 150
+    y = 335
+    pygame.draw.polygon(surface, grey, ((x+10, y+0), (x+5, y+0), (x+0, y+10), (x+5, y+20), (x+10, y+20), (x+5, y+10)))
+    x = 350
+    pygame.draw.polygon(surface, grey, ((x+0, y+0), (x+5, y+0), (x+10, y+10), (x+5, y+20), (x+0, y+20), (x+5, y+10)))
     pygame.display.update()
     clock.tick(60)
 
 
 def main():
     global on_menu, playing
-    
-    #surface = pygame.display.set_mode((width, width))
     pygame.display.set_caption("PythonPythonGame")
-    clock = pygame.time.Clock()
-
 
     # ***** Game Objects ***** #
-    s = snake.snake(blue, (10, 5))
-    snack = cube.cube(random_snack(rows, s), color=green)
+    s = snake.snake(purple, (10, 5), rows = rows, width = width)
+    snack = cube.cube(random_snack(rows, s), color=green, rows = rows, width = width)
     
     if two_player:
-        s2 = snake.snake(red, (10,15))
+        s2 = snake.snake(red, (10,15), rows = rows, width = width)
 
     # ***** Main Loop ***** #
     main_loop = True
@@ -159,7 +174,7 @@ def main():
             if s.body[0].pos == snack.pos:
                 s.addCube()
                 scr.update()
-                snack = cube.cube(random_snack(rows, s), color=green)
+                snack = cube.cube(random_snack(rows, s), color=green, rows = rows, width = width)
 
             for x in range(len(s.body)):
                 if s.body[x].pos in list(map(lambda z: z.pos, s.body[x+1:])):
