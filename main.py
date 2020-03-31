@@ -43,10 +43,10 @@ grey = (150, 150, 150)
 brown = (139, 69, 19)
 
 buttons = []
-start_button = button.button("Play!", 160, 251, 180, 60, brown, light_green)
-two_player_button = button.button("Game Mode", 140, 314, 230, 60, brown, light_green)
-settings_button = button.button("Game Settings", 140, 377, 230, 60, brown, light_green)
-quit_button = button.button("Quit", 212, 440, 80, 60, brown, light_green)
+start_button = button.button("Play!", (width-180)/2, 251, 180, 60, brown, light_green)
+two_player_button = button.button("Game Mode", (width-230)/2, 314, 230, 60, brown, light_green)
+settings_button = button.button("Game Settings", (width-230)/2, 377, 230, 60, brown, light_green)
+quit_button = button.button("Quit", (width-80)/2, 440, 80, 60, brown, light_green)
 
 buttons.append(start_button)
 buttons.append(two_player_button)
@@ -102,7 +102,7 @@ def menu(font, clock):
     surface.fill(black)
     h_scr.draw(surface, "High Score: ")
     image = pygame.image.load('Snake-icon.png')
-    surface.blit(image,(125,0))
+    surface.blit(image,((width-256)/2,0))
 
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -140,11 +140,6 @@ def menu(font, clock):
     for b in buttons:
         b.draw(surface, font)
 
-    x = 150
-    y = 335
-    pygame.draw.polygon(surface, grey, ((x+10, y+0), (x+5, y+0), (x+0, y+10), (x+5, y+20), (x+10, y+20), (x+5, y+10)))
-    x = 350
-    pygame.draw.polygon(surface, grey, ((x+0, y+0), (x+5, y+0), (x+10, y+10), (x+5, y+20), (x+0, y+20), (x+5, y+10)))
     pygame.display.update()
     clock.tick(60)
 
@@ -169,7 +164,7 @@ def main():
             menu(font, clock)
 
         while playing: 
-            clock.tick(10)
+            
             s.move()
             if s.body[0].pos == snack.pos:
                 s.addCube()
@@ -187,7 +182,7 @@ def main():
                     playing = False
                     on_menu = True
                     break
-
+            clock.tick(10)
             redraw_window(surface, s, snack, scr, width, rows)
     d.close()
     pygame.quit()

@@ -21,33 +21,29 @@ class snake(object):
                 pygame.quit()
                 break
 
-            keys = pygame.key.get_pressed()
+        keys = pygame.key.get_pressed()
 
-            for key in keys:
-                if keys[pygame.K_LEFT] and self.dirnx != 1:
-                    self.dirnx = -1
-                    self.dirny = 0
-                    self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
-                    break
+        for key in keys:
+            if keys[pygame.K_LEFT] and self.dirnx != 1:
+                self.dirnx = -1
+                self.dirny = 0
+                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]     
 
-                elif keys[pygame.K_RIGHT] and self.dirnx != -1:
-                    self.dirnx = 1
-                    self.dirny = 0
-                    self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
-                    break
+            if keys[pygame.K_RIGHT] and self.dirnx != -1:
+                self.dirnx = 1
+                self.dirny = 0
+                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]     
 
-                elif keys[pygame.K_UP] and self.dirny != 1:
-                    self.dirny = -1
-                    self.dirnx = 0
-                    self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
-                    break
+            if keys[pygame.K_UP] and self.dirny != 1:
+                self.dirny = -1
+                self.dirnx = 0
+                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]       
 
-                elif keys[pygame.K_DOWN] and self.dirny != -1:
-                    self.dirny = 1
-                    self.dirnx = 0
-                    self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
-                    break
-            break
+            if keys[pygame.K_DOWN] and self.dirny != -1:
+                self.dirny = 1
+                self.dirnx = 0
+                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+            break                
 
         for i, c in enumerate(self.body):
             p = c.pos[:]
@@ -68,7 +64,7 @@ class snake(object):
                 elif c.pos[1] < 0: c.pos = (c.pos[0], c.rows -1)
 
     def reset(self, pos):
-        self.head = cube.cube(pos, color = self.color, rows = rows, width = width)
+        self.head = cube.cube(pos, color = self.color, rows = self.rows, width = self.width)
         self.body = []
         self.body.append(self.head)
         self.turns = {}
