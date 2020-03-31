@@ -49,6 +49,10 @@ V1.0.5
       condensed into one game_var object and passed in one go to improve readability
       -game mode/ user settings screen(s)
       
+V1.0.6
+      -introduction of the game_settings class, used to unify all classes as a place to store global settings and variables for the application
+      -gs is used to reduce the parameter requirement for constructors and methods, and to keep them from being changed everytime there is a new variable
+
 Current Bugs:
       -None
 
