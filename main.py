@@ -8,6 +8,7 @@ import snake
 import button
 import score
 import shelve
+import game_settings as g
 
 # Shelve anf PyGame startup
 d = shelve.open('score.txt')
@@ -182,8 +183,9 @@ def main():
                     playing = False
                     on_menu = True
                     break
-            clock.tick(10)
+            
             redraw_window(surface, s, snack, scr, width, rows)
+            clock.tick(10)
     d.close()
     pygame.quit()
     quit()
