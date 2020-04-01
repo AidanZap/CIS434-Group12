@@ -7,16 +7,24 @@ class snake(object):
     turns = {}
 
     def __init__(self, gs, player = 1):
+        self.gs = gs
         self.player =  player
         self.color = gs.s_colors[self.player -1]
         self.start_pos = gs.s_starts[player -1]
-        self.head = cube.cube(gs, self.start_pos, color = self.color)
+        self.width = gs.width
+        self.rows = gs.rows
+
+        self.head = cube.cube(self.gs, self.start_pos, color = self.color)
+        self.body = []
         self.body.append(self.head)
+        self.turns = {}
         self.dirnx = 1
         self.dirny = 0
-        self.rows = gs.rows
-        self.width = gs.width
-        self.gs = gs
+
+        
+        
+        
+        
 
     def move(self):
         for event in pygame.event.get():
@@ -27,22 +35,22 @@ class snake(object):
         keys = pygame.key.get_pressed()
 
         for key in keys:
-            if keys[pygame.K_LEFT] and self.dirnx != 1:
+            if ((keys[pygame.K_LEFT] and self.player == 1) or (keys[pygame.K_a] and self.player == 2)) and self.dirnx != 1:
                 self.dirnx = -1
                 self.dirny = 0
                 self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]     
 
-            elif keys[pygame.K_RIGHT] and self.dirnx != -1:
+            elif ((keys[pygame.K_RIGHT] and self.player == 1) or (keys[pygame.K_d] and self.player == 2)) and self.dirnx != -1:
                 self.dirnx = 1
                 self.dirny = 0
                 self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]     
 
-            elif keys[pygame.K_UP] and self.dirny != 1:
+            elif ((keys[pygame.K_UP] and self.player == 1) or (keys[pygame.K_w] and self.player == 2)) and self.dirny != 1:
                 self.dirny = -1
                 self.dirnx = 0
                 self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]       
 
-            elif keys[pygame.K_DOWN] and self.dirny != -1:
+            elif ((keys[pygame.K_DOWN] and self.player == 1) or (keys[pygame.K_s] and self.player == 2)) and self.dirny != -1:
                 self.dirny = 1
                 self.dirnx = 0
                 self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
@@ -71,8 +79,8 @@ class snake(object):
         self.body = []
         self.body.append(self.head)
         self.turns = {}
-        self.dirnx = 0
-        self.dirny = 1
+        self.dirnx = 1
+        self.dirny = 0
 
     def addCube(self):
         tail = self.body[-1]

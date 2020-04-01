@@ -76,6 +76,10 @@ def draw_text(text, text_color, x, y):
     text_rect.center = (x, y)
     gs.surface.blit(text_obj, text_rect)
 
+def reset_game():
+    for s in gs.snakes:
+        s.reset()
+
 
 def menu():
     global gs
@@ -132,9 +136,9 @@ def main():
     gs.snakes.append(snake.snake(gs, 1))
     gs.snacks.append(cube.cube(gs, random_snack(), color=gs.color.green))
     
-    if gs.two_player:
+    if gs.two_player or True:
         gs.snakes.append(snake.snake(gs, 2))
-
+    print(gs.snakes)
     # ***** Main Loop ***** #
     main_loop = True
 
@@ -146,18 +150,17 @@ def main():
         while gs.playing: 
             for s in gs.snakes:
                 s.move()
-            for snack in gs.snacks:
-                for s in gs.snakes:
+                for snack in gs.snacks:         
                     if s.body[0].pos == snack.pos:
                         s.addCube()
                         scr.update()
                         gs.snacks.remove(snack)
                         gs.snacks.append(cube.cube(gs, random_snack(), color=gs.color.green))
-            for s in gs.snakes:
+
                 for x in range(len(s.body)):
                     if s.body[x].pos in list(map(lambda z: z.pos, s.body[x+1:])):
                         print('Score: ', len(s.body))
-                        s.reset()
+                        reset_game()
                         if scr.score_count > h_scr.score_count:
                             d['score'] = scr.score_count
                             h_scr.score_count = scr.score_count
