@@ -9,6 +9,7 @@ class game:
         pygame.init()
         self.color = self.color()
         #Game Vars
+        self.menu_width = 600
         self.width = 500
         self.row_width = 25
         self.rows = self.width//self.row_width
@@ -19,9 +20,11 @@ class game:
         self.snacks = []
         self.snakes = []
         self.obstacles = []
+        #images
+        self.exp_image= pygame.image.load('explosion3.png')
 
         # PyGame vars
-        self.surface = pygame.display.set_mode((self.width, self.width + self.banner_height))
+        self.surface = pygame.display.set_mode((self.menu_width, self.menu_width + self.banner_height))
         self.font = pygame.font.SysFont("Arial", 32)
         self.clock = pygame.time.Clock()
         #snake vars

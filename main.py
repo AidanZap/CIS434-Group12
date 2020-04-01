@@ -18,10 +18,10 @@ h_scr = score.score(d['score'],gs)
 
 
 buttons = []
-start_button = button.button(gs, "Play!", (gs.width-180)/2, 251, 180, 60, gs.color.brown, gs.color.light_green)
-two_player_button = button.button(gs, "Game Mode", (gs.width-230)/2, 314, 230, 60,gs.color.brown, gs.color.light_green)
-settings_button = button.button(gs, "Game Settings", (gs.width-230)/2, 377, 230, 60, gs.color.brown, gs.color.light_green)
-quit_button = button.button(gs, "Quit", (gs.width-80)/2, 440, 80, 60, gs.color.brown, gs.color.light_green)
+start_button = button.button(gs, "Play!", (gs.menu_width-180)/2, 251, 180, 60, gs.color.brown, gs.color.light_green)
+two_player_button = button.button(gs, "Game Mode", (gs.menu_width-230)/2, 314, 230, 60,gs.color.brown, gs.color.light_green)
+settings_button = button.button(gs, "Game Settings", (gs.menu_width-230)/2, 377, 230, 60, gs.color.brown, gs.color.light_green)
+quit_button = button.button(gs, "Quit", (gs.menu_width-80)/2, 440, 80, 60, gs.color.brown, gs.color.light_green)
 
 buttons.append(start_button)
 buttons.append(two_player_button)
@@ -86,7 +86,7 @@ def menu():
     gs.surface.fill(gs.color.black)
     h_scr.draw("High Score: ")
     image = pygame.image.load('Snake-icon.png')
-    gs.surface.blit(image,((gs.width-256)/2,0))
+    gs.surface.blit(image,((gs.menu_width-256)/2,0))
 
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -101,6 +101,7 @@ def menu():
             if click:
                 gs.on_menu = False
                 gs.playing = True
+                gs.surface = pygame.display.set_mode((gs.width, gs.width + gs.banner_height))
         else:
             start_button.hover = False
         if two_player_button.rect.collidepoint((mx, my)):
@@ -136,9 +137,8 @@ def main():
     gs.snakes.append(snake.snake(gs, 1))
     gs.snacks.append(cube.cube(gs, random_snack(), color=gs.color.green))
     
-    if gs.two_player or True:
+    if gs.two_player:
         gs.snakes.append(snake.snake(gs, 2))
-    print(gs.snakes)
     # ***** Main Loop ***** #
     main_loop = True
 
@@ -154,12 +154,16 @@ def main():
                     if s.body[0].pos == snack.pos:
                         s.addCube()
                         scr.update()
+                        
                         gs.snacks.remove(snack)
                         gs.snacks.append(cube.cube(gs, random_snack(), color=gs.color.green))
+
 
                 for x in range(len(s.body)):
                     if s.body[x].pos in list(map(lambda z: z.pos, s.body[x+1:])):
                         print('Score: ', len(s.body))
+                        gs.surface.blit(gs.exp_image,(s.body[0].pos[0]*gs.row_width,s.body[0].pos[1]*gs.row_width))
+                        pygame.display.update()
                         reset_game()
                         if scr.score_count > h_scr.score_count:
                             d['score'] = scr.score_count
@@ -167,6 +171,10 @@ def main():
                         scr.score_count = 0
                         gs.playing = False
                         gs.on_menu = True
+                        pygame.time.delay(3000)#run end game screen here
+                        
+                        
+                        gs.surface = pygame.display.set_mode((gs.menu_width, gs.menu_width + gs.banner_height))
                         break
             
             redraw_window()
