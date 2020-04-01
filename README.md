@@ -50,8 +50,16 @@ Recreating Snake Game in Python; PyhonPythonGame
       -game mode/ user settings screen(s)  
       
 #### V1.0.6  
-      - ntroduction of the game_settings class, used to unify all classes as a place to store global settings and variables for the application  
+      - introduction of the game_settings class, used to unify all classes as a place to store global settings and variables for the application  
       - gs is used to reduce the parameter requirement for constructors and methods, and to keep them from being changed everytime there is a new variable  
+
+#### V1.0.7  
+      - snakes,snack and obstacles added to gs as lists  
+      - new gs lists used to implement two player mode, modifications for user input added to snake.py, may need further improvement  
+      todo:  
+      - two player mode still needed to be added as an option on menu  
+      - snake v snake collisions unhandled
+      - score per snake
 
 ##### Current Bugs:  
       - None  
