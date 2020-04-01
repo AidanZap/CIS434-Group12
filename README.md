@@ -1,4 +1,4 @@
-# CIS434-Group12
+## CIS434-Group12
 Recreating Snake Game in Python; PyhonPythonGame
 
 ####Aidan Z
@@ -6,12 +6,12 @@ Recreating Snake Game in Python; PyhonPythonGame
 ####Derek W
 
 
-V1.0.0 Base game is working
+####V1.0.0 Base game is working
   features to work on next:
-    -main menu
-    -difficulties
-    -live score
-    -customization menu in main menu to change colors of things
+    - main menu  
+    - difficulties  
+    - live score  
+    - customization menu in main menu to change colors of things  
     
 V1.0.1 Added functionality, snake can not turn 180 degrees
   todo:
