@@ -1,0 +1,11 @@
+2 player mode ideas (DW)
+  -1 snack to increase competition
+  -chance of rainbow snack that allows players to cut through the enemy snack, be cool to make snake rainbow
+    -other powerups? speed? +5 cubes
+
+  having random rainbow instead of the whole gamemode being like that switches thing up in game
+  collisions subtract 10 blocks until death( turn the snake away or let go through?), keeps winning snake from suiciding for highscore win
+  
+  2 player race
+   - 120 seconds, any collision is automatic loss
+   - highest score at 120 wins, no rainbow
