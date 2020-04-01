@@ -11,7 +11,7 @@ import shelve
 import game_settings as g
 
 # Shelve anf PyGame startup
-d = shelve.open('score.txt')
+d = shelve.open('data/score.txt')
 gs = g.game()
 scr = score.score(1, gs)
 h_scr = score.score(d['score'],gs)
@@ -85,7 +85,7 @@ def menu():
     global gs
     gs.surface.fill(gs.color.black)
     h_scr.draw("High Score: ")
-    image = pygame.image.load('Snake-icon.png')
+    image = pygame.image.load('img/Snake-icon.png')
     gs.surface.blit(image,((gs.menu_width-256)/2,0))
 
     for event in pygame.event.get():

@@ -21,7 +21,7 @@ class game:
         self.snakes = []
         self.obstacles = []
         #images
-        self.exp_image= pygame.image.load('explosion3.png')
+        self.exp_image= pygame.image.load('img/explosion3.png')
 
         # PyGame vars
         self.surface = pygame.display.set_mode((self.menu_width, self.menu_width + self.banner_height))
