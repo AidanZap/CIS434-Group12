@@ -1,4 +1,6 @@
 import pygame
+import cube
+import snake
 
 class game:
 
@@ -14,6 +16,9 @@ class game:
         self.two_player = False
         self.playing = False
         self.on_menu = True
+        self.snacks = []
+        self.snakes = []
+        self.obstacles = []
 
         # PyGame vars
         self.surface = pygame.display.set_mode((self.width, self.width + self.banner_height))

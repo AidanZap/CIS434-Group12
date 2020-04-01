@@ -40,17 +40,23 @@ def draw_grid():
         pygame.draw.line(gs.surface, gs.color.dark_grey, (0, y), (gs.width, y))
 
 
-def redraw_window(s,snack):
+def redraw_window():
     gs.surface.fill(gs.color.black)
-    s.draw()
-    snack.draw()
+    for s in gs.snakes:
+        s.draw()
+    for snack in gs.snacks:
+        snack.draw()
+    for obs in gs.obstacles:
+        obs.draw()
     scr.draw("Score: ")
     draw_grid()
     pygame.display.update()
 
 
-def random_snack(item):
-    positions = item.body
+def random_snack():
+    positions = []
+    for s in gs.snakes:
+        positions.extend(s.body)
 
     while True:
         x = random.randrange(gs.rows)
@@ -123,11 +129,11 @@ def main():
     pygame.display.set_caption("PythonPythonGame")
 
     # ***** Game Objects ***** #
-    s = snake.snake(gs, 1)
-    snack = cube.cube(gs, random_snack(s), color=gs.color.green)
+    gs.snakes.append(snake.snake(gs, 1))
+    gs.snacks.append(cube.cube(gs, random_snack(), color=gs.color.green))
     
     if gs.two_player:
-        s2 = snake.snake(gs, 2)
+        gs.snakes.append(snake.snake(gs, 2))
 
     # ***** Main Loop ***** #
     main_loop = True
@@ -138,26 +144,29 @@ def main():
             menu()
 
         while gs.playing: 
+            for s in gs.snakes:
+                s.move()
+            for snack in gs.snacks:
+                for s in gs.snakes:
+                    if s.body[0].pos == snack.pos:
+                        s.addCube()
+                        scr.update()
+                        gs.snacks.remove(snack)
+                        gs.snacks.append(cube.cube(gs, random_snack(), color=gs.color.green))
+            for s in gs.snakes:
+                for x in range(len(s.body)):
+                    if s.body[x].pos in list(map(lambda z: z.pos, s.body[x+1:])):
+                        print('Score: ', len(s.body))
+                        s.reset()
+                        if scr.score_count > h_scr.score_count:
+                            d['score'] = scr.score_count
+                            h_scr.score_count = scr.score_count
+                        scr.score_count = 0
+                        gs.playing = False
+                        gs.on_menu = True
+                        break
             
-            s.move()
-            if s.body[0].pos == snack.pos:
-                s.addCube()
-                scr.update()
-                snack = cube.cube(gs, random_snack(s), color=gs.color.green)
-
-            for x in range(len(s.body)):
-                if s.body[x].pos in list(map(lambda z: z.pos, s.body[x+1:])):
-                    print('Score: ', len(s.body))
-                    s.reset()
-                    if scr.score_count > h_scr.score_count:
-                        d['score'] = scr.score_count
-                        h_scr.score_count = scr.score_count
-                    scr.score_count = 0
-                    gs.playing = False
-                    gs.on_menu = True
-                    break
-            
-            redraw_window( s, snack)
+            redraw_window()
             gs.clock.tick(10)
     d.close()
     pygame.quit()
