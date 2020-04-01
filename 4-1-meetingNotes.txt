@@ -4,8 +4,41 @@
     -other powerups? speed? +5 cubes
 
   having random rainbow instead of the whole gamemode being like that switches thing up in game
-  collisions subtract 10 blocks until death( turn the snake away or let go through?), keeps winning snake from suiciding for highscore win
+  whoever collides loses, head to head big boi wins
   
   2 player race
    - 120 seconds, any collision is automatic loss
    - highest score at 120 wins, no rainbow
+
+
+ideas to draw scores
+ static? or pass in xy, store locations in gs
+
+
+ GAMEMODE Page
+
+ highscore is for 1p classic, 1 fruit, normal board size
+
+ Mode -----------------------------------------         For buttons only 1 can be selected, reset others on select
+  permanently highlighted buttons for each mode
+  -1p classic
+  -2p race
+  -2p melee
+
+
+Game Settings --------------------------------------------
+  mini, normal, large, ludicrous
+# of fruit, obstacle and borders on/off check boxes
+#f < width*width/2
+
+Color ---------------------------------------
+p1 Color  p2 color
+
+
+
+Lose Screen----------------------------------
+  1 player classic highscore table, input 3 initials
+
+  other: p1 wins/ p2 wins ... etc you tried eat yourself, mines 
+
+  return to menu or replay 

@@ -9,10 +9,10 @@ class game:
         pygame.init()
         self.color = self.color()
         #Game Vars
-        self.width = 800
+        self.width = 500
         self.row_width = 25
         self.rows = self.width//self.row_width
-        self.banner_height = 50
+        self.banner_height = 100
         self.two_player = False
         self.playing = False
         self.on_menu = True
