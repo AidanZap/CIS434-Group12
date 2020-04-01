@@ -7,14 +7,14 @@ Recreating Snake Game in Python; PyhonPythonGame
 
 
 #### V1.0.0 Base game is working  
-  features to work on next:  
+    features to work on next:  
     - main menu  
     - difficulties  
     - live score  
     - customization menu in main menu to change colors of things  
     
 #### V1.0.1 Added functionality, snake can not turn 180 degrees    
-  todo:  
+    todo:  
     - add menu() (Aidan, Derek)  
     - Score (toral)  
     
