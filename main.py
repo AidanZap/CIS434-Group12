@@ -325,8 +325,6 @@ def main():
 
         if gs.playing:
             setupGame()
-            print(gs.width)
-        #gs.surface = pygame.display.set_mode((gs.width, gs.width + gs.banner_height))
         while gs.playing:
             
             redraw_window()
@@ -342,7 +340,7 @@ def main():
 
 
                 for x in range(len(s.body)):
-                    if s.body[x].pos in list(map(lambda z: z.pos, s.body[x+1:])):
+                    if s.body[0].pos in list(map(lambda z: z.pos, s.body[x+1:])):
                         print('Score: ', len(s.body))
                         gs.surface.blit(gs.exp_image,(s.body[0].pos[0]*gs.row_width,s.body[0].pos[1]*gs.row_width))
                         pygame.display.update()
