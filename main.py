@@ -94,6 +94,8 @@ def random_snack():
     positions = []
     for s in gs.snakes:
         positions.extend(s.body)
+    for s in gs.snacks:
+        positions.append(s)
 
     while True:
         x = random.randrange(gs.rows)
@@ -115,10 +117,9 @@ def draw_text(text, text_color, x, y):
 
 
 def reset_game():
-    for s in gs.snakes:
-        s.reset()
-
-    gs.snakes.clear
+    global gs
+    gs.snakes.clear()
+    gs.snacks.clear()
 
 
 
@@ -227,12 +228,12 @@ def settings_menu():
 
         if size_mini.rect.collidepoint(mx, my) and click:
             if size_mini in settings_active:
-                gs.width = 540
+                gs.width = 550
                 update_settings_buttons(size_mini, size_regular)
                 continue
         if size_regular.rect.collidepoint(mx, my) and click:
             if size_regular in settings_active:
-                gs.width = 680
+                gs.width = 700
                 update_settings_buttons(size_regular, size_large)
                 continue
         if size_large.rect.collidepoint(mx, my) and click:
@@ -243,8 +244,6 @@ def settings_menu():
         if size_ludicrous.rect.collidepoint(mx, my) and click:
             if size_ludicrous in settings_active:
                 gs.width = 400
-                print(" playing mini")
-
                 update_settings_buttons(size_ludicrous, size_mini)
                 continue
         if fruit_one.rect.collidepoint(mx, my) and click:
@@ -287,18 +286,23 @@ def settings_menu():
                 gs.obstacle_on = True
                 update_settings_buttons(obstacle_off, obstacle_on)
                 continue
-
     for a in settings_active:
         a.draw()
     pygame.display.update()
     gs.clock.tick(60)
 
 def setupGame():
+    gs.update()
+    gs.snakes.append(snake.snake(gs, 1))
+    for i in range(gs.fruit_count):
+        gs.snacks.append(cube.cube(gs, random_snack(), color=gs.color.green))
     gs.surface = pygame.display.set_mode((gs.width, gs.width + gs.banner_height))
     if gs.mode == "race":
         gs.snakes.append(snake.snake(gs, 2))
     elif gs.mode == "melee":
         gs.snakes.append(snake.snake(gs, 2))
+
+    scr.setGS(gs)
 
     for s in gs.snakes:
         s.setGS(gs)
@@ -307,11 +311,6 @@ def setupGame():
 def main():
     global gs
     pygame.display.set_caption("PythonPythonGame")
-
-    # ***** Game Objects ***** #
-    gs.snakes.append(snake.snake(gs, 1))
-    gs.snacks.append(cube.cube(gs, random_snack(), color=gs.color.green))
-
     
     # ***** Main Loop ***** #
     main_loop = True
@@ -326,6 +325,7 @@ def main():
 
         if gs.playing:
             setupGame()
+            print(gs.width)
         #gs.surface = pygame.display.set_mode((gs.width, gs.width + gs.banner_height))
         while gs.playing:
             

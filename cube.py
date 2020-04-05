@@ -14,6 +14,9 @@ class cube(object):
     
     def setGS(self, gs):
         self.gs = gs
+        self.rows = gs.rows
+        self.w = gs.width
+        print(gs.rows)
 
 
     def move(self, dirnx, dirny):

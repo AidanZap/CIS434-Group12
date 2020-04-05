@@ -9,7 +9,7 @@ class game:
         pygame.init()
         self.color = self.color()
         # Game Vars
-        self.width = 800
+        self.width = 550
         self.row_width = 25
         self.rows = self.width//self.row_width
         self.menu_width = 500
@@ -39,6 +39,9 @@ class game:
         self.obstacles_on = False
         self.borders_on = True
     
+    def update(self):
+        self.rows = self.width//self.row_width
+
     class color:
         def __init__(self):
             self.white = (255, 255, 255)
