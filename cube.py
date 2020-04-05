@@ -11,6 +11,10 @@ class cube(object):
         self.rows = gs.rows
         self.w = gs.width
         self.gs = gs
+    
+    def setGS(self, gs):
+        self.gs = gs
+
 
     def move(self, dirnx, dirny):
         self.dirnx = dirnx

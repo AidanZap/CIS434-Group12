@@ -13,17 +13,19 @@ class game:
         self.row_width = 25
         self.rows = self.width//self.row_width
         self.menu_width = 500
-        self.menu_height = 800
-        self.banner_height = 50
+        self.menu_height = 500
+        self.banner_height = 100
         self.playing = False
         self.on_menu = True
         self.on_settings = False
         self.snacks = []
         self.snakes = []
         self.obstacles = []
+        #images
+        self.exp_image= pygame.image.load('img/explosion3.png')
 
         # PyGame vars
-        self.surface = pygame.display.set_mode((self.menu_width, self.menu_width + self.banner_height))
+        self.surface = pygame.display.set_mode((self.menu_width, self.menu_height + self.banner_height))
         self.font = pygame.font.SysFont("Arial", 32)
         self.clock = pygame.time.Clock()
 

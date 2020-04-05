@@ -22,7 +22,11 @@ class snake(object):
         self.dirny = 0
 
         
-        
+    def setGS(self, gs):
+        self.gs = gs
+        for c in self.body:
+            c.setGS(gs)
+
         
         
 

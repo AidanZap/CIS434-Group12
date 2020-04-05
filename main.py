@@ -11,7 +11,7 @@ import shelve
 import game_settings as g
 
 # Shelve anf PyGame startup
-d = shelve.open('score.txt')
+d = shelve.open('data/score.txt')
 gs = g.game()
 scr = score.score(1, gs)
 h_scr = score.score(d['score'],gs)
@@ -118,12 +118,16 @@ def reset_game():
     for s in gs.snakes:
         s.reset()
 
+    gs.snakes.clear
+
+
+
 
 def menu():
     global gs
     gs.surface.fill(gs.color.black)
     h_scr.draw("High Score: ")
-    image = pygame.image.load('Snake-icon.png')
+    image = pygame.image.load('img/Snake-icon.png')
     gs.surface.blit(image,((gs.menu_width-256)/2,0))
 
     for event in pygame.event.get():
@@ -139,6 +143,8 @@ def menu():
             if click:
                 gs.on_menu = False
                 gs.playing = True
+                
+
         else:
             start_button.hover = False
 
@@ -172,6 +178,7 @@ def update_settings_buttons(remove, add):
 
 
 def settings_menu():
+    global gs
     gs.surface.fill(gs.color.black)
     back_button.draw()
     draw_text("Settings Menu", gs.color.white, gs.menu_width/2, 20)
@@ -236,6 +243,8 @@ def settings_menu():
         if size_ludicrous.rect.collidepoint(mx, my) and click:
             if size_ludicrous in settings_active:
                 gs.width = 400
+                print(" playing mini")
+
                 update_settings_buttons(size_ludicrous, size_mini)
                 continue
         if fruit_one.rect.collidepoint(mx, my) and click:
@@ -284,6 +293,16 @@ def settings_menu():
     pygame.display.update()
     gs.clock.tick(60)
 
+def setupGame():
+    gs.surface = pygame.display.set_mode((gs.width, gs.width + gs.banner_height))
+    if gs.mode == "race":
+        gs.snakes.append(snake.snake(gs, 2))
+    elif gs.mode == "melee":
+        gs.snakes.append(snake.snake(gs, 2))
+
+    for s in gs.snakes:
+        s.setGS(gs)
+
 
 def main():
     global gs
@@ -293,12 +312,7 @@ def main():
     gs.snakes.append(snake.snake(gs, 1))
     gs.snacks.append(cube.cube(gs, random_snack(), color=gs.color.green))
 
-    if gs.mode == "race":
-        gs.snakes.append(snake.snake(gs, 2))
-    elif gs.mode == "melee":
-        gs.snakes.append(snake.snake(gs, 2))
-    print(gs.snakes)
-
+    
     # ***** Main Loop ***** #
     main_loop = True
 
@@ -310,9 +324,11 @@ def main():
         while gs.on_settings:
             settings_menu()
 
-        gs.surface = pygame.display.set_mode((gs.width, gs.width + gs.banner_height))
+        if gs.playing:
+            setupGame()
+        #gs.surface = pygame.display.set_mode((gs.width, gs.width + gs.banner_height))
         while gs.playing:
-
+            
             redraw_window()
             for s in gs.snakes:
                 s.move()
@@ -320,12 +336,16 @@ def main():
                     if s.body[0].pos == snack.pos:
                         s.addCube()
                         scr.update()
+                        
                         gs.snacks.remove(snack)
                         gs.snacks.append(cube.cube(gs, random_snack(), color=gs.color.green))
+
 
                 for x in range(len(s.body)):
                     if s.body[x].pos in list(map(lambda z: z.pos, s.body[x+1:])):
                         print('Score: ', len(s.body))
+                        gs.surface.blit(gs.exp_image,(s.body[0].pos[0]*gs.row_width,s.body[0].pos[1]*gs.row_width))
+                        pygame.display.update()
                         reset_game()
                         if scr.score_count > h_scr.score_count:
                             d['score'] = scr.score_count
@@ -333,6 +353,10 @@ def main():
                         scr.score_count = 0
                         gs.playing = False
                         gs.on_menu = True
+                        pygame.time.delay(3000)#run end game screen here
+                        
+                        
+                        gs.surface = pygame.display.set_mode((gs.menu_width, gs.menu_height + gs.banner_height))
                         break
             
             redraw_window()
