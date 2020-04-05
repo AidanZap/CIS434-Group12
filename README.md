@@ -61,12 +61,18 @@ Recreating Snake Game in Python; PyhonPythonGame
       - snake v snake collisions unhandled
       - score per snake
 
+#### v1.1.0
+    -First working settings menu, all buttons change variables
+    -Fixed settings menu bugs
+    -Updating board and fruit settings apply properly in-game
+
 ##### Current Bugs:  
       - None  
-
 
 ##### progress report notes:  
       - add two player race mode and two player melee mode  
       - get started on final report  
       - obstacle fruits  
+      - two player collision handling
+      - end screen pop up / hi score implementation
       
