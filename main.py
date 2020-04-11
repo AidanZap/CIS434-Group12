@@ -333,7 +333,7 @@ def main():
                 for snack in gs.snacks:         
                     if s.body[0].pos == snack.pos:
                         s.addCube()
-                        scr.update()
+                        scr.update(gs.snakes.index(s))
                         
                         gs.snacks.remove(snack)
                         gs.snacks.append(cube.cube(gs, random_snack(), color=gs.color.green))
