@@ -19,7 +19,8 @@ class game:
         self.on_menu = True
         self.on_settings = False
         self.snacks = []
-        self.snakes = []
+        self.snake1 = None
+        self.snake2 = None
         self.obstacles = []
         #images
         self.exp_image= pygame.image.load('img/explosion3.png')
@@ -30,7 +31,7 @@ class game:
         self.clock = pygame.time.Clock()
 
         # snake vars
-        self.s_colors = [self.color.purple, self.color.red]  #[0] = player 1, [1] is player 2 etc
+        self.s_colors = [self.color.purple, self.color.red]  # [0] = player 1, [1] is player 2 etc
         self.s_starts = [(10, 5), (10, 15)]
 
         # Mode vars

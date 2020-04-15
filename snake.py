@@ -6,7 +6,7 @@ class snake(object):
     body = []
     turns = {}
 
-    def __init__(self, gs, player = 1):
+    def __init__(self, gs, player):
         self.gs = gs
         self.player =  player
         self.color = gs.s_colors[self.player -1]
