@@ -65,6 +65,11 @@ Recreating Snake Game in Python; PyhonPythonGame
     -First working settings menu, all buttons change variables
     -Fixed settings menu bugs
     -Updating board and fruit settings apply properly in-game
+    
+#### v1.2.0
+    -Merged 2-player branch, working collisions in 2-player
+    -each snake (1 and 2 player) are now their own fields in settings class
+    -Individual player scores are tracked as their own fields in score class
 
 ##### Current Bugs:  
       - None  
