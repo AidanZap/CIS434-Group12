@@ -38,27 +38,25 @@ class snake(object):
 
         keys = pygame.key.get_pressed()
 
-        for key in keys:
-            if ((keys[pygame.K_LEFT] and self.player == 1) or (keys[pygame.K_a] and self.player == 2)) and self.dirnx != 1:
-                self.dirnx = -1
-                self.dirny = 0
-                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]     
+        if ((keys[pygame.K_LEFT] and self.player == 1) or (keys[pygame.K_a] and self.player == 2)) and self.dirnx != 1:
+            self.dirnx = -1
+            self.dirny = 0
+            self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
 
-            elif ((keys[pygame.K_RIGHT] and self.player == 1) or (keys[pygame.K_d] and self.player == 2)) and self.dirnx != -1:
-                self.dirnx = 1
-                self.dirny = 0
-                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]     
+        elif ((keys[pygame.K_RIGHT] and self.player == 1) or (keys[pygame.K_d] and self.player == 2)) and self.dirnx != -1:
+            self.dirnx = 1
+            self.dirny = 0
+            self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
 
-            elif ((keys[pygame.K_UP] and self.player == 1) or (keys[pygame.K_w] and self.player == 2)) and self.dirny != 1:
-                self.dirny = -1
-                self.dirnx = 0
-                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]       
+        elif ((keys[pygame.K_UP] and self.player == 1) or (keys[pygame.K_w] and self.player == 2)) and self.dirny != 1:
+            self.dirny = -1
+            self.dirnx = 0
+            self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
 
-            elif ((keys[pygame.K_DOWN] and self.player == 1) or (keys[pygame.K_s] and self.player == 2)) and self.dirny != -1:
-                self.dirny = 1
-                self.dirnx = 0
-                self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
-            break                
+        elif ((keys[pygame.K_DOWN] and self.player == 1) or (keys[pygame.K_s] and self.player == 2)) and self.dirny != -1:
+            self.dirny = 1
+            self.dirnx = 0
+            self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
 
         for i, c in enumerate(self.body):
             p = c.pos[:]
