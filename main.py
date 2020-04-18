@@ -280,12 +280,12 @@ def settings_menu():
                 continue
         if border_on.rect.collidepoint(mx, my) and click:
             if border_on in settings_active:
-                gs.border_on = False
+                gs.borders_on = False
                 update_settings_buttons(border_on, border_off)
                 continue
         if border_off.rect.collidepoint(mx, my) and click:
             if border_off in settings_active:
-                gs.border_on = True
+                gs.borders_on = True
                 update_settings_buttons(border_off, border_on)
                 continue
         if obstacle_on.rect.collidepoint(mx, my) and click:
@@ -293,7 +293,7 @@ def settings_menu():
                 gs.obstacles_on = False
                 update_settings_buttons(obstacle_on, obstacle_off)
                 continue
-        if obstacle_on.rect.collidepoint(mx, my) and click:
+        if obstacle_off.rect.collidepoint(mx, my) and click:
             if obstacle_off in settings_active:
                 gs.obstacles_on = True
                 update_settings_buttons(obstacle_off, obstacle_on)
@@ -308,14 +308,16 @@ def setup_game():
     global scr, gs
     gs.update()
     gs.snake1 = snake.snake(gs, 1)
+    gs.snake1.setGS(gs)
     for i in range(gs.fruit_count):
         gs.snacks.append(cube.cube(gs, random_snack(), color=gs.color.green))
     if gs.obstacles_on:
-        for _ in range(4):
+        for _ in range(5):
             gs.obstacles.append(cube.cube(gs, random_obstacle(), color=gs.color.grey))
     gs.surface = pygame.display.set_mode((gs.width, gs.width + gs.banner_height))
     if gs.mode == "race" or gs.mode == "melee":
         gs.snake2 = snake.snake(gs, 2)
+        gs.snake2.setGS(gs)
         scr = score.score(gs, True)
     else:
         scr = score.score(gs, False)
@@ -332,6 +334,7 @@ def reset_game():
     gs.on_menu = True
     pygame.time.delay(3000)  # run end game screen here
     gs.surface = pygame.display.set_mode((gs.menu_width, gs.menu_height + gs.banner_height))
+    gs.update()
 
 
 def check_collision():
@@ -399,9 +402,13 @@ def main():
             redraw_window()
             if gs.snake1.move():
                 collision(True, 1) if gs.snake2 else collision(False, 1)
+                reset_game()
+                break
             if gs.snake2:
                 if gs.snake2.move():
                     collision(True, 2)
+                    reset_game()
+                    break
             for snack in gs.snacks:
                 if gs.snake1.body[0].pos == snack.pos:
                     gs.snake1.addCube()

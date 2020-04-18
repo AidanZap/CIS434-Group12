@@ -75,12 +75,21 @@ class snake(object):
                 c.move(c.dirnx, c.dirny)
                 if c.pos[0] < 0:
                     c.pos = (c.rows - 1, c.pos[1])
+                    if self.gs.borders_on:
+                        return True
                 elif c.pos[0] > c.rows - 1:
                     c.pos = (0, c.pos[1])
+                    if self.gs.borders_on:
+                        return True
                 elif c.pos[1] > c.rows - 1:
                     c.pos = (c.pos[0], 0)
+                    if self.gs.borders_on:
+                        return True
                 elif c.pos[1] < 0:
                     c.pos = (c.pos[0], c.rows - 1)
+                    if self.gs.borders_on:
+                        return True
+        return False  # False signifies no collision for borders is needed
 
     def reset(self):
         self.head = cube.cube(self.gs, self.start_pos, color=self.color)
