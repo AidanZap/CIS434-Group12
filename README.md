@@ -39,15 +39,15 @@ Recreating Snake Game in Python; PyhonPythonGame
       - almost all gameplay related variables are dynamic to allow for user customization  
       
    ###### bug fixes:  
-      -hidden column, missing blocks during crossover removed  
-      -snake/cube color conflict removed  
-      -no up on start fixed  
-      -input being ignored because it was put in to fast improved, so snake reaction time improved  
+      - hidden column, missing blocks during crossover removed  
+      - snake/cube color conflict removed  
+      - no up on start fixed  
+      - input being ignored because it was put in to fast improved, so snake reaction time improved  
       
    ###### next step:  
-      -dynamic variable means a lot more parameters being passed to objects like snake, cube and score so all variables must be
+      - dynamic variable means a lot more parameters being passed to objects like snake, cube and score so all variables must be
       condensed into one game_var object and passed in one go to improve readability  
-      -game mode/ user settings screen(s)  
+      - game mode/ user settings screen(s)  
       
 #### V1.0.6  
       - introduction of the game_settings class, used to unify all classes as a place to store global settings and variables for the application  
@@ -61,22 +61,28 @@ Recreating Snake Game in Python; PyhonPythonGame
       - snake v snake collisions unhandled
       - score per snake
 
-#### v1.1.0
-    -First working settings menu, all buttons change variables
-    -Fixed settings menu bugs
-    -Updating board and fruit settings apply properly in-game
+#### V1.1.0
+    - First working settings menu, all buttons change variables
+    - Fixed settings menu bugs
+    - Updating board and fruit settings apply properly in-game
     
-#### v1.2.0
-    -Merged 2-player branch, working collisions in 2-player
-    -each snake (1 and 2 player) are now their own fields in settings class
-    -Individual player scores are tracked as their own fields in score class
+#### V1.1.1
+    - Merged 2-player branch, working collisions in 2-player
+    - each snake (1 and 2 player) are now their own fields in settings class
+    - Individual player scores are tracked as their own fields in score class
 
-#### v1.3.0
-    -Working obstacles + borders
-    -Introduced some bugs
+#### V1.1.2
+    - Working obstacles + borders
+    - Introduced some bugs
+    
+#### V1.1.3
+    - Melee mode finished, growth added
+    - scr variable moved to gs
+    - Endgame screen added, allows for replay, displays score and high score
+    - For 2P modes colliding player score set to 0 to show clear winner
     
 ##### Current Bugs:  
-      - None  
+      - Snake can pass thru border if arrow key held in that direction  
 
 ##### progress report notes:  
       - add two player race mode and two player melee mode  
