@@ -120,7 +120,7 @@ def menu():
     gs.surface.fill(gs.color.black)
     gs.surface.blit(gs.font.render(f"High Score: {h_scr}", 1, gs.color.green), [0, gs.menu_width + 60])
     image = pygame.image.load('img/Snake-icon.png')
-    gs.surface.blit(image, ((gs.menu_width-256)/2, 0))
+    gs.surface.blit(image, ((gs.menu_width-256)//2, 0))
 
     for event in pygame.event.get():
         if event.type == QUIT:
