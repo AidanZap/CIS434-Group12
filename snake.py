@@ -5,6 +5,7 @@ import cube
 class snake(object):
     body = []
     turns = {}
+    counter = 0
 
     def __init__(self, gs, player):
         self.gs = gs
@@ -13,6 +14,7 @@ class snake(object):
         self.start_pos = gs.s_starts[player - 1]
         self.width = gs.width
         self.rows = gs.rows
+        self.grow = False
 
         self.head = cube.cube(self.gs, self.start_pos, color=self.color)
         self.body = []
@@ -26,7 +28,17 @@ class snake(object):
         for c in self.body:
             c.setGS(gs)
 
-    def move(self):
+    def move(self,gs):
+        if self.grow:
+            self.counter += 1
+            if self.counter >= 10:
+                self.counter = 0
+                self.addCube()
+                if self == gs.snake1:
+                    gs.scr.add_score(1)
+                if self == gs.snake2:
+                    gs.scr.add_score(2)
+                    
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()

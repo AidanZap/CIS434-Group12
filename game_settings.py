@@ -22,6 +22,7 @@ class game:
         self.snake1 = None
         self.snake2 = None
         self.obstacles = []
+        self.scr = None
         #images
         self.exp_image= pygame.image.load('img/explosion3.png')
 
