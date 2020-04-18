@@ -22,6 +22,13 @@ menu_buttons.append(start_button)
 menu_buttons.append(settings_button)
 menu_buttons.append(quit_button)
 
+# ***** Endgame Buttons ******#
+endgame_buttons = []
+replay_button = button.button(gs, "Play Again!", (gs.width-180)/2, 280, 180, 60, gs.color.brown, gs.color.light_green)
+return_button = button.button(gs, "Return to Menu", (gs.width-230)/2, 360, 230, 60, gs.color.brown, gs.color.light_green)
+endgame_buttons.append(replay_button)
+endgame_buttons.append(return_button)
+
 # ***** Settings Buttons *****#
 back_button = button.button(gs, "<-- back", 0, 0, 130, 45, gs.color.brown, gs.color.light_green)
 settings_active = []
@@ -329,12 +336,52 @@ def reset_game():
     gs.snake2 = None
     gs.snacks.clear()
     gs.obstacles.clear()
-    scr = None
     gs.playing = False
     gs.on_menu = True
-    pygame.time.delay(3000)  # run end game screen here
+    pygame.time.delay(2000)  # run end game screen here
+    end_game_screen()
+    scr = None
     gs.surface = pygame.display.set_mode((gs.menu_width, gs.menu_height + gs.banner_height))
     gs.update()
+
+def end_game_screen():
+    global gs
+    while True:
+
+        gs.surface.fill(gs.color.black)
+        gs.surface.blit(gs.font.render(f"High Score: {h_scr}", 1, gs.color.green), [0, gs.width + 60])
+        for b in endgame_buttons:
+            b.x = (gs.width-b.w)/2
+            b.draw()
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                d.close()
+                pygame.quit()
+                quit()
+            click = (event.type == pygame.MOUSEBUTTONDOWN)                  
+            mx, my = pygame.mouse.get_pos()
+
+            if replay_button.rect.collidepoint(mx, my):
+                replay_button.hover = True
+                if click:
+                    gs.on_menu = False
+                    gs.playing = True
+                    return
+
+            else:
+                replay_button.hover = False
+
+            if return_button.rect.collidepoint(mx, my):
+                return_button.hover = True
+                if click:
+                    return
+            else:
+                return_button.hover = False
+        scr.draw()
+        pygame.display.update()
+        
+
 
 
 def check_collision():

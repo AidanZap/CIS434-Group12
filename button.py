@@ -26,6 +26,7 @@ class button:
         self.gs = gs
 
     def draw(self):
+        self.rect = pygame.Rect(self.x, self.y, self.w, self.h)
         if self.hidden:
             return
         if self.hover:
