@@ -8,27 +8,23 @@ class snake(object):
 
     def __init__(self, gs, player):
         self.gs = gs
-        self.player =  player
-        self.color = gs.s_colors[self.player -1]
-        self.start_pos = gs.s_starts[player -1]
+        self.player = player
+        self.color = gs.s_colors[self.player - 1]
+        self.start_pos = gs.s_starts[player - 1]
         self.width = gs.width
         self.rows = gs.rows
 
-        self.head = cube.cube(self.gs, self.start_pos, color = self.color)
+        self.head = cube.cube(self.gs, self.start_pos, color=self.color)
         self.body = []
         self.body.append(self.head)
         self.turns = {}
         self.dirnx = 1
         self.dirny = 0
 
-        
     def setGS(self, gs):
         self.gs = gs
         for c in self.body:
             c.setGS(gs)
-
-        
-        
 
     def move(self):
         for event in pygame.event.get():
@@ -43,7 +39,8 @@ class snake(object):
             self.dirny = 0
             self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
 
-        elif ((keys[pygame.K_RIGHT] and self.player == 1) or (keys[pygame.K_d] and self.player == 2)) and self.dirnx != -1:
+        elif ((keys[pygame.K_RIGHT] and self.player == 1) or (
+                keys[pygame.K_d] and self.player == 2)) and self.dirnx != -1:
             self.dirnx = 1
             self.dirny = 0
             self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
@@ -53,7 +50,8 @@ class snake(object):
             self.dirnx = 0
             self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
 
-        elif ((keys[pygame.K_DOWN] and self.player == 1) or (keys[pygame.K_s] and self.player == 2)) and self.dirny != -1:
+        elif ((keys[pygame.K_DOWN] and self.player == 1) or (
+                keys[pygame.K_s] and self.player == 2)) and self.dirny != -1:
             self.dirny = 1
             self.dirnx = 0
             self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
@@ -63,21 +61,29 @@ class snake(object):
             if p in self.turns:
                 turn = self.turns[p]
                 c.move(turn[0], turn[1])
-                if c.pos[0] < 0: c.pos = (c.rows-1, c.pos[1])
-                elif c.pos[0] > c.rows -1: c.pos = (0,c.pos[1])
-                elif c.pos[1] > c.rows -1: c.pos = (c.pos[0], 0)
-                elif c.pos[1] < 0: c.pos = (c.pos[0], c.rows -1)
+                if c.pos[0] < 0:
+                    c.pos = (c.rows - 1, c.pos[1])
+                elif c.pos[0] > c.rows - 1:
+                    c.pos = (0, c.pos[1])
+                elif c.pos[1] > c.rows - 1:
+                    c.pos = (c.pos[0], 0)
+                elif c.pos[1] < 0:
+                    c.pos = (c.pos[0], c.rows - 1)
                 if i == len(self.body) - 1:
                     self.turns.pop(p)
             else:
                 c.move(c.dirnx, c.dirny)
-                if c.pos[0] < 0: c.pos = (c.rows-1, c.pos[1])
-                elif c.pos[0] > c.rows -1: c.pos = (0,c.pos[1])
-                elif c.pos[1] > c.rows -1: c.pos = (c.pos[0], 0)
-                elif c.pos[1] < 0: c.pos = (c.pos[0], c.rows -1)
+                if c.pos[0] < 0:
+                    c.pos = (c.rows - 1, c.pos[1])
+                elif c.pos[0] > c.rows - 1:
+                    c.pos = (0, c.pos[1])
+                elif c.pos[1] > c.rows - 1:
+                    c.pos = (c.pos[0], 0)
+                elif c.pos[1] < 0:
+                    c.pos = (c.pos[0], c.rows - 1)
 
     def reset(self):
-        self.head = cube.cube(self.gs, self.start_pos, color = self.color)
+        self.head = cube.cube(self.gs, self.start_pos, color=self.color)
         self.body = []
         self.body.append(self.head)
         self.turns = {}
@@ -89,13 +95,13 @@ class snake(object):
         dx, dy = tail.dirnx, tail.dirny
 
         if dx == 1 and dy == 0:
-            self.body.append(cube.cube(self.gs, (tail.pos[0]-1, tail.pos[1]), color = self.color))
+            self.body.append(cube.cube(self.gs, (tail.pos[0] - 1, tail.pos[1]), color=self.color))
         elif dx == -1 and dy == 0:
-            self.body.append(cube.cube(self.gs, (tail.pos[0]+1, tail.pos[1]), color = self.color))
+            self.body.append(cube.cube(self.gs, (tail.pos[0] + 1, tail.pos[1]), color=self.color))
         elif dx == 0 and dy == 1:
-            self.body.append(cube.cube(self.gs, (tail.pos[0], tail.pos[1]-1), color = self.color))
+            self.body.append(cube.cube(self.gs, (tail.pos[0], tail.pos[1] - 1), color=self.color))
         elif dx == 0 and dy == -1:
-            self.body.append(cube.cube(self.gs, (tail.pos[0], tail.pos[1]+1), color = self.color))
+            self.body.append(cube.cube(self.gs, (tail.pos[0], tail.pos[1] + 1), color=self.color))
 
         self.body[-1].dirnx = dx
         self.body[-1].dirny = dy
