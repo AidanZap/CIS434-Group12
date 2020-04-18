@@ -71,6 +71,10 @@ Recreating Snake Game in Python; PyhonPythonGame
     -each snake (1 and 2 player) are now their own fields in settings class
     -Individual player scores are tracked as their own fields in score class
 
+#### v1.3.0
+    -Working obstacles + borders
+    -Introduced some bugs
+    
 ##### Current Bugs:  
       - None  
 
