@@ -89,6 +89,7 @@ def random_snack():
     global gs
     positions = []
     positions.extend(gs.snake1.body)
+    positions.extend(gs.obstacles)
     if gs.snake2:
         positions.extend(gs.snake2.body)
     for s in gs.snacks:
@@ -305,12 +306,10 @@ def settings_menu():
 def setup_game():
     global gs
     gs.update()
+    gs.snacks.clear()
     gs.snake1 = snake.snake(gs, 1)
     gs.snake1.setGS(gs)
 
-    if gs.mode != "melee":
-        for i in range(gs.fruit_count):
-            gs.snacks.append(cube.cube(gs, random_snack(), color=gs.color.green))
     if gs.obstacles_on:
         for _ in range(5):
             gs.obstacles.append(cube.cube(gs, random_obstacle(), color=gs.color.grey))
@@ -331,6 +330,10 @@ def setup_game():
             for y in range(gs.rows):
                 if x == 0 or y == 0 or y == gs.rows-1 or x == gs.rows-1:
                     gs.obstacles.append(cube.cube(gs, (x,y), color=gs.color.grey))
+
+    if gs.mode != "melee":
+        for i in range(gs.fruit_count):
+            gs.snacks.append(cube.cube(gs, random_snack(), color=gs.color.green))
 
 
 def redraw_window():
@@ -409,6 +412,9 @@ def check_collision():
         for x in range(len(gs.snake1.body)):
             if gs.snake1.body[0].pos in list(map(lambda z: z.pos, gs.snake1.body[x + 1:])) or \
                     gs.snake1.body[0].pos in list(map(lambda z: z.pos, gs.snake2.body[x:])):
+                if gs.snake1.body[0].pos == gs.snake2.body[0].pos:
+                    gs.scr.player1_score = 0
+                    gs.scr.player2_score = 0
                 collision(True, 1)
                 return True
         for x in range(len(gs.snake2.body)):
