@@ -18,13 +18,16 @@ class score(object):
         elif player == 2:
             self.player2_score += 1
             
-    def draw(self):
+    def draw(self, seconds_left=None):
         if self.two_player:
             text = self.gs.font.render(
                 f"Player 1 Score: {self.player1_score}     Player 2 Score: {self.player2_score}", 1, self.gs.color.red)
         else:
             text = self.gs.font.render(f"Score: {self.player1_score}", 1, self.gs.color.red)
         self.gs.surface.blit(text, [0, self.gs.width + 5])
+        if self.gs.mode == "race" and seconds_left:
+            text = self.gs.font.render(f"Time Remaining: {seconds_left}", 1, self.gs.color.red)
+            self.gs.surface.blit(text, [0, self.gs.width + 35])
 
 
         # if len(score.score_count) > 0:
