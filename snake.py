@@ -38,7 +38,7 @@ class snake(object):
                     gs.scr.add_score(1)
                 if self == gs.snake2:
                     gs.scr.add_score(2)
-                    
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -52,7 +52,7 @@ class snake(object):
             self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
 
         elif ((keys[pygame.K_RIGHT] and self.player == 1) or (
-                keys[pygame.K_d] and self.player == 2)) and self.dirnx != -1:
+                keys[pygame.K_d] and self.player == 2)) and (self.dirnx != -1 and self.dirnx != 1):
             self.dirnx = 1
             self.dirny = 0
             self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
