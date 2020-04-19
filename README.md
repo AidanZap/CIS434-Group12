@@ -81,6 +81,10 @@ Recreating Snake Game in Python; PyhonPythonGame
     - Endgame screen added, allows for replay, displays score and high score
     - For 2P modes colliding player score set to 0 to show clear winner
     
+#### V1.1.4
+    -Added timer for race mode
+    -some bug fixes    
+    
 ##### Current Bugs:  
       - Snake can pass thru border if arrow key held in that direction  
 

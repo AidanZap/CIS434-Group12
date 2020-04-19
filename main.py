@@ -7,6 +7,11 @@ import button
 import score
 import shelve
 import game_settings as g
+import threading
+import time
+
+# threading timer
+seconds_left = None
 
 # Shelve anf PyGame startup
 d = shelve.open('data/score.txt')
@@ -80,9 +85,6 @@ def draw_grid():
         pygame.draw.line(gs.surface, gs.color.dark_grey, (0, y), (gs.width, y))
 
 
-
-
-
 def random_snack():
     global gs
     positions = []
@@ -102,6 +104,7 @@ def random_snack():
             break
 
     return x, y
+
 
 def random_obstacle():
     global gs
@@ -339,13 +342,14 @@ def redraw_window():
         snack.draw()
     for obs in gs.obstacles:
         obs.draw()
-    gs.scr.draw()
+    gs.scr.draw(seconds_left)
     draw_grid()
     pygame.display.update()
 
 
 def reset_game():
-    global gs
+    global gs, seconds_left
+    seconds_left = 0
     gs.snake1 = None
     gs.snake2 = None
     gs.snacks.clear()
@@ -355,6 +359,7 @@ def reset_game():
     pygame.time.delay(2000)  # run end game screen here
     end_game_screen()
     gs.update()
+
 
 def end_game_screen():
     global gs
@@ -396,8 +401,6 @@ def end_game_screen():
                 return_button.hover = False
         gs.scr.draw()
         pygame.display.update()
-        
-
 
 
 def check_collision():
@@ -448,8 +451,16 @@ def collision(two_player, colliding_player):
             gs.scr.player2_score = 0
 
 
+def timer():
+    global seconds_left
+
+    while seconds_left > 0:
+        time.sleep(1)
+        seconds_left -= 1
+
+
 def main():
-    global gs, h_scr
+    global gs, h_scr, seconds_left
     pygame.display.set_caption("PythonPythonGame")
     
     # ***** Main Loop ***** #
@@ -465,6 +476,10 @@ def main():
 
         if gs.playing:
             setup_game()
+            if gs.mode == "race":
+                timer_thread = threading.Thread(target=timer, name="Countdown")
+                seconds_left = 60
+                timer_thread.start()
         while gs.playing:
             redraw_window()
             if gs.snake1.move(gs):
@@ -491,7 +506,11 @@ def main():
             if check_collision():
                 pygame.display.update()
                 reset_game()
+                break
 
+            if gs.mode == "race" and seconds_left < 1:
+                reset_game()
+                break
 
             gs.clock.tick(10)
     d.close()
