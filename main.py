@@ -304,9 +304,10 @@ def setup_game():
     gs.update()
     gs.snake1 = snake.snake(gs, 1)
     gs.snake1.setGS(gs)
-    
-    for i in range(gs.fruit_count):
-        gs.snacks.append(cube.cube(gs, random_snack(), color=gs.color.green))
+
+    if gs.mode is not "melee":
+        for i in range(gs.fruit_count):
+            gs.snacks.append(cube.cube(gs, random_snack(), color=gs.color.green))
     if gs.obstacles_on:
         for _ in range(5):
             gs.obstacles.append(cube.cube(gs, random_obstacle(), color=gs.color.grey))
@@ -318,8 +319,6 @@ def setup_game():
     else:
         gs.scr = score.score(gs, False)
     if gs.mode == "melee":
-        gs.snacks.clear()
-        gs.fruit_count = 0
         gs.snake1.grow = True
         if gs.snake2:
             gs.snake2.grow = True
