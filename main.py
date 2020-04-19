@@ -421,14 +421,14 @@ def check_collision():
             if gs.snake1.body[0].pos in list(map(lambda z: z.pos, gs.snake1.body[x + 1:])):
                 collision(False, 1)
                 return True
-    if gs.obstacles_on:
-        for obstacle in gs.obstacles:
-            if gs.snake1.body[0].pos == obstacle.pos:
-                collision(True, 1) if gs.snake2 else collision(False, 1)
-                return True
-            if gs.snake2 and gs.snake2.body[0].pos == obstacle.pos:
-                collision(True, 2)
-                return True
+    
+    for obstacle in gs.obstacles:
+        if gs.snake1.body[0].pos == obstacle.pos:
+            collision(True, 1) if gs.snake2 else collision(False, 1)
+            return True
+        if gs.snake2 and gs.snake2.body[0].pos == obstacle.pos:
+            collision(True, 2)
+            return True
     return False
 
 
