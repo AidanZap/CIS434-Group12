@@ -5,6 +5,22 @@ Recreating Snake Game in Python; PyhonPythonGame
 #### Toral Z
 #### Derek W
 
+### V2.0.0 Final Release
+#### How to play.
+##### Classic Mode
+    - Basic snake game, collect fruits (green cubes) without collding with yourself or the walls
+##### 2 Player Race
+    - Compete against a friend to see who can collect the most fruit in 60 seconds
+    - Careful running into the opponent is an automatic loss and a head on collision is a draw
+##### 2 Player Melee
+    - No Fruit! Snakes automatically grow every 10 tiles, see who can survive the longest!
+    
+##### Additional Game Settings
+    - Obstacles: spawns grey cubes that if ran into end the game
+    - Board Size: change the size of the arena
+    - Number of fruit: increase the number of fruit spawned to speed up the game
+    - Borders: turn off borders to allow the snake to loop back to the other side of the arena
+    
 
 #### V1.0.0 Base game is working  
     features to work on next:  
@@ -86,7 +102,7 @@ Recreating Snake Game in Python; PyhonPythonGame
     -some bug fixes    
     
 ##### Current Bugs:  
-      - Snake can pass thru border if arrow key held in that direction  
+      - None
 
 ##### progress report notes:  
       - add two player race mode and two player melee mode  
@@ -94,4 +110,6 @@ Recreating Snake Game in Python; PyhonPythonGame
       - obstacle fruits  
       - two player collision handling
       - end screen pop up / hi score implementation
+      
+
       
