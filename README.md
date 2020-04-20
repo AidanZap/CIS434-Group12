@@ -5,6 +5,14 @@ Recreating Snake Game in Python; PyhonPythonGame
 #### Toral Z
 #### Derek W
 
+### To Run
+    - Make sure Python is installed, Minimum version 3 recommended
+    - From main directory(/CIS434-Group12)
+    - pip install pygame
+    - pip install shelve       (for highscore)
+    - python main.py
+    - Enjoy
+
 ### V2.0.0 Final Release
 #### How to play.
 
