@@ -5,6 +5,8 @@ Recreating Snake Game in Python; PythonPythonGame
 #### Toral Z
 #### Derek W
 
+### Final Presentation and Report can be found in Documentation folder
+
 ### To Run
     - Make sure Python is installed, Minimum version 3 recommended
     - From main directory(/CIS434-Group12)

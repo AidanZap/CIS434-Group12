@@ -249,7 +249,7 @@ def settings_menu():
                 continue
         if size_large.rect.collidepoint(mx, my) and click:
             if size_large in settings_active:
-                gs.width = 1000
+                gs.width = 900
                 update_settings_buttons(size_large, size_ludicrous)
                 continue
         if size_ludicrous.rect.collidepoint(mx, my) and click:
@@ -444,7 +444,7 @@ def collision(two_player, colliding_player):
         print(f"Player 1: {gs.scr.player1_score} | Player 2: {gs.scr.player2_score}")
     else:
         print(f'Score: {gs.scr.player1_score}')
-        if gs.scr.player1_score > h_scr:
+        if gs.scr.player1_score > h_scr and gs.width == 550 and gs.fruit_count == 1:
             d['score'] = gs.scr.player1_score
             h_scr = gs.scr.player1_score
     if colliding_player == 1:
