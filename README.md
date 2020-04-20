@@ -7,6 +7,9 @@ Recreating Snake Game in Python; PyhonPythonGame
 
 ### V2.0.0 Final Release
 #### How to play.
+
+##### Moverment: Arrow keys for player 1 and A,W,S,D for player 2
+
 ##### Classic Mode
     - Basic snake game, collect fruits (green cubes) without collding with yourself or the walls
 ##### 2 Player Race
