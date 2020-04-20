@@ -27,13 +27,13 @@ Recreating Snake Game in Python; PythonPythonGame
     - No Fruit! Snakes automatically grow every 10 tiles, see who can survive the longest!
     
 ##### Additional Game Settings
-    - Obstacles: spawns grey cubes that if ran into end the game
-    - Board Size: change the size of the arena
-    - Number of fruit: increase the number of fruit spawned to speed up the game
-    - Borders: turn off borders to allow the snake to loop back to the other side of the arena
+    - Obstacles: spawns grey cubes that if ran into end the game  
+    - Board Size: change the size of the arena  
+    - Number of fruit: increase the number of fruit spawned to speed up the game  
+    - Borders: turn off borders to allow the snake to loop back to the other side of the arena  
 
     
-<br/>
+
 ### Previous Versions 
 <br/>
 
