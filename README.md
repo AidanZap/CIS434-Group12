@@ -1,5 +1,5 @@
 ## CIS434-Group12
-Recreating Snake Game in Python; PyhonPythonGame
+Recreating Snake Game in Python; PythonPythonGame
 
 #### Aidan Z
 #### Toral Z
@@ -31,7 +31,11 @@ Recreating Snake Game in Python; PyhonPythonGame
     - Board Size: change the size of the arena
     - Number of fruit: increase the number of fruit spawned to speed up the game
     - Borders: turn off borders to allow the snake to loop back to the other side of the arena
+
     
+<br/>
+### Previous Versions 
+<br/>
 
 #### V1.0.0 Base game is working  
     features to work on next:  
